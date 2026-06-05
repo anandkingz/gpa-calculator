@@ -431,26 +431,25 @@ function openGPA(){
 
     let maxSem = 6;
 
-    if(
-        degree === "B.E" ||
-        degree === "B.TECH"
-    ){
+    if(degree === "B.E" || degree === "B.TECH"){
         maxSem = 8;
     }
 
-    for(let i=1; i<=maxSem; i++){
+    let radioDiv =
+    document.getElementById("gpaSemesterRadio");
 
+    radioDiv.innerHTML = "";
+
+    for(let i=1; i<=maxSem; i++){
         radioDiv.innerHTML += `
         <label>
             <input type="radio"
                    name="gpaSemester"
                    value="${i}">
             SEM ${i}
-        </label>
-        `;
+        </label>`;
     }
 }
-
 
 function openCGPA(){
 
