@@ -14,10 +14,12 @@
 }
 
 body{
-    /* background:#1469e8; */
-    background-image: url("C:\Users\Neela\Downloads\WhatsApp Image 2026-06-03 at 10.07.41 PM.jpeg");
+    background-image: url("img/WhatsApp Image 2026-06-03 at 10.07.41 PM.jpeg");
     background-repeat: no-repeat;
+    background-size: cover;
     background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
     padding:20px;
 }
 
@@ -28,10 +30,12 @@ body{
 
 .card{
     background:white;
+    opacity: 70%;
     padding:20px;
     border-radius:10px;
     margin-bottom:20px;
     box-shadow:0 2px 10px rgba(0,0,0,0.1);
+    
 }
 
 h1,h2{
@@ -47,19 +51,18 @@ input,select{
     border:1px solid #ccc;
     border-radius:5px;
 }
-
 button{
-    padding:10px 20px;
-    border:none;
-    border-radius:5px;
-    background:#0056b3;
-    color:white;
-    cursor:pointer;
-    margin:5px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    background: #0B2F52;
+    color: #FEFEFE;
+    cursor: pointer;
+    margin: 5px;
 }
 
 button:hover{
-    background:#003f85;
+    background: #154a7d;
 }
 
 .row{
@@ -150,14 +153,34 @@ label{
 #university{
     text-transform: uppercase;
 }
+@page{
+    size: A4;
+    margin: 10mm;
+}
 
+body{
+    margin:0;
+}
+.header{
+    display:flex;
+    align-items:center;
+}
+
+.logo{
+    width:80px;
+    height:80px;
+}
+
+.header h2{
+    flex:1;
+    text-align:center;
+    margin-right:80px; /* same as logo width */
+}
 </style>
 </head>
 <body>
 
 <div class="container">
-
-<!-- LOGIN -->
 <div class="card" id="loginPage">
     <h1>University Student CGPA Calculator</h1>
 
@@ -187,7 +210,6 @@ Password must contain:
     </center>
 </div>
 
-<!-- PERSONAL DETAILS -->
 <div class="card hidden" id="detailsPage">
 
     <h2>PERSONAL INFORMATION</h2>
@@ -218,44 +240,46 @@ Password must contain:
     <input type="text" id="university" placeholder="University Name">
 
 
-    <select id="text" placeholder="State">
-        <option>SELECT STATE</option>
-        <option>ANDHRA PRADESH</option>
-<option>ARUNACHAL PRADESH</option>
-<option>ASSAM</option>
-<option>BIHAR</option>
-<option>CHHATTISGARH</option>
-<option>GOA</option>
-<option>GUJARAT</option>
-<option>HARYANA</option>
-<option>HIMACHAL PRADESH</option>
-<option>JHARKHAND</option>
-<option>KARNATAKA</option>
-<option>KERALA</option>
-<option>MADHYA PRADESH</option>
-<option>MAHARASHTRA</option>
-<option>MANIPUR</option>
-<option>MEGHALAYA</option>
-<option>MIZORAM</option>
-<option>NAGALAND</option>
-<option>ODISHA</option>
-<option>PUNJAB</option>
-<option>RAJASTHAN</option>
-<option>SIKKIM</option>
-<option>TAMIL NADU</option>
-<option>TELANGANA</option>
-<option>TRIPURA</option>
-<option>UTTAR PRADESH</option>
-<option>UTTARAKHAND</option>
-<option>WEST BENGAL</option>
-<option>ANDAMAN AND NICOBAR ISLANDS</option>
-<option>CHANDIGARH</option>
-<option>DADRA AND NAGAR HAVELI AND DAMAN AND DIU</option>
-<option>DELHI</option>
-<option>JAMMU AND KASHMIR</option>
-<option>LADAKH</option>
-<option>LAKSHADWEEP</option>
-<option>PUDUCHERRY</option>
+    <select id="text" placeholder="District">
+        <option>SELECT DISTRICT</option>
+       <option>ARIYALUR</option>
+<option>CHENGALPATTU</option>
+<option>CHENNAI</option>
+<option>COIMBATORE</option>
+<option>CUDDALORE</option>
+<option>DHARMAPURI</option>
+<option>DINDIGUL</option>
+<option>ERODE</option>
+<option>KALLAKURICHI</option>
+<option>KANCHIPURAM</option>
+<option>KANNIYAKUMARI</option>
+<option>KARUR</option>
+<option>KRISHNAGIRI</option>
+<option>MADURAI</option>
+<option>MAYILADUTHURAI</option>
+<option>NAGAPATTINAM</option>
+<option>NAMAKKAL</option>
+<option>NILGIRIS</option>
+<option>PERAMBALUR</option>
+<option>PUDUKKOTTAI</option>
+<option>RAMANATHAPURAM</option>
+<option>RANIPET</option>
+<option>SALEM</option>
+<option>SIVAGANGAI</option>
+<option>TENKASI</option>
+<option>THANJAVUR</option>
+<option>THENI</option>
+<option>THOOTHUKUDI</option>
+<option>TIRUCHIRAPPALLI</option>
+<option>TIRUNELVELI</option>
+<option>TIRUPATHUR</option>
+<option>TIRUPPUR</option>
+<option>TIRUVALLUR</option>
+<option>TIRUVANNAMALAI</option>
+<option>TIRUVARUR</option>
+<option>VELLORE</option>
+<option>VILUPPURAM</option>
+<option>VIRUDHUNAGAR</option>
     </select>
 
     <input type="email" id="mail" placeholder="Mail ID">
@@ -285,8 +309,7 @@ Password must contain:
 </select>
 
     <label><b>REGULATION</b></label>
-
-<select id="regulation" placeholder="ENTER REGULATION">
+<select id="gparegulation">
     <option>R2017</option>
     <option>R2021</option>
     <option>R2024</option>
@@ -303,13 +326,11 @@ Password must contain:
     </table>
 
     <button onclick="addSubject()">Add Subject</button>
-    <button onclick="calculateGPA()">Calculate GPA</button>
+<button onclick="calculateGPA()">Calculate GPA</button>
+<button onclick="printReport()">Print Report</button>
 
-    <div class="result" id="gpaResult"></div>
+<div class="result" id="gpaResult"></div>
 
-</div>
-
-<!-- CGPA PAGE -->
 <div class="card hidden" id="cgpaPage">
 
     <h2>CGPA Calculator</h2>
@@ -318,7 +339,7 @@ Password must contain:
 
      <label><b>REGULATION</b></label>
 
-<select id="regulation" placeholder="ENTER REGULATION">
+<select id="cgparegulation">
     <option>R2017</option>
     <option>R2021</option>
     <option>R2024</option>
@@ -328,17 +349,16 @@ Password must contain:
     <div id="semesterRadio" class="radio-group"></div>
 
     <div id="semesterInputs"></div>
+<button onclick="createSemesterInputs()">Create GPA Fields</button>
 
-    <button onclick="createSemesterInputs()">Create GPA Fields</button>
+<button onclick="calculateCGPA()">Calculate CGPA</button>
 
-    <button onclick="calculateCGPA()">Calculate CGPA</button>
+<button onclick="printReport()">Print Report</button>
 
-    <div class="result" id="cgpaResult"></div>
+<div class="result" id="cgpaResult"></div>
 
 </div>
-
 </div>
-
 <script>
 
 function showDetails(){
@@ -440,16 +460,8 @@ function openGPA(){
 
     radioDiv.innerHTML = "";
 
-    for(let i=1; i<=maxSem; i++){
-        radioDiv.innerHTML += `
-        <label>
-            <input type="radio"
-                   name="gpaSemester"
-                   value="${i}">
-            SEM ${i}
-        </label>`;
-    }
 }
+
 
 function openCGPA(){
 
@@ -671,6 +683,226 @@ document.getElementById("institution").addEventListener("input", function(){
 document.getElementById("university").addEventListener("input", function(){
     this.value = this.value.toUpperCase();
 });
+function printReport(){
+
+    let studentName = document.getElementById("studentName").value;
+    let regNo = document.getElementById("regNo").value;
+    let degree = document.getElementById("degree").value;
+    let department = document.getElementById("department").value;
+    let year = document.getElementById("year").value;
+    let institution = document.getElementById("institution").value;
+    let university = document.getElementById("university").value;
+    let district = document.getElementById("text").value;
+    let mail = document.getElementById("mail").value;
+
+    let semester = document.getElementById("semester") ?
+                   document.getElementById("semester").value : "";
+
+    let gpaRegulation = document.getElementById("gparegulation") ?
+                        document.getElementById("gparegulation").value : "";
+
+    let cgpaRegulation = document.getElementById("cgparegulation") ?
+                         document.getElementById("cgparegulation").value : "";
+
+    let gpa = document.getElementById("gpaResult") ?
+              document.getElementById("gpaResult").innerText : "";
+
+    let cgpa = document.getElementById("cgpaResult") ?
+               document.getElementById("cgpaResult").innerText : "";
+
+    let tableRows = "";
+
+    let table = document.getElementById("subjectTable");
+
+    if(table){
+        for(let i = 1; i < table.rows.length; i++){
+
+            let title = table.rows[i].cells[0].querySelector("input").value;
+            let code = table.rows[i].cells[1].querySelector("input").value;
+            let credit = table.rows[i].cells[2].querySelector("input").value;
+            let grade = table.rows[i].cells[3].querySelector("select").value;
+
+            tableRows += `
+            <tr>
+                <td>${title}</td>
+                <td>${code}</td>
+                <td>${credit}</td>
+                <td>${grade}</td>
+            </tr>`;
+        }
+    }
+
+    let cgpaRows = "";
+
+    let gpaInputs = document.getElementsByClassName("gpaInput");
+
+    for(let i = 0; i < gpaInputs.length; i++){
+
+        cgpaRows += `
+        <tr>
+            <td>Semester ${i + 1}</td>
+            <td>${gpaInputs[i].value}</td>
+        </tr>`;
+    }
+
+    if(cgpaRows.trim() === ""){
+        cgpaRows = `
+        <tr>
+            <td colspan="2">No CGPA Data Available</td>
+        </tr>`;
+    }
+
+    let printWindow = window.open("", "_blank");
+
+    printWindow.document.write(`
+    <html>
+    <head>
+
+        <style>
+
+        @page{
+            size:A4;
+            margin:10mm;
+        }
+
+        body{
+            font-family:Arial,sans-serif;
+            padding:20px;
+            color:black;
+        }
+
+        .header{
+            display:flex;
+            align-items:center;
+            gap:20px;
+        }
+
+        .logo{
+            width:80px;
+            height:80px;
+        }
+
+        .header h2{
+            flex:1;
+            text-align:center;
+            margin-right:80px;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            margin-top:15px;
+        }
+
+        table,th,td{
+            border:1px solid black;
+        }
+
+        th,td{
+            padding:8px;
+            text-align:center;
+        }
+
+        .line{
+            margin:6px 0;
+        }
+
+        .result{
+            font-size:22px;
+            font-weight:bold;
+            text-align:center;
+            margin-top:20px;
+        }
+
+        .verified{
+            text-align:right;
+            margin-top:50px;
+            font-size:22px;
+            font-weight:bold;
+        }
+
+        hr{
+            margin:20px 0;
+        }
+
+        </style>
+    </head>
+
+    <body>
+
+        <div class="header">
+            <img src="./img/image.png" alt="Logo" class="logo">
+            <h2>University Student CGPA Calculator</h2>
+        </div>
+
+        <hr>
+
+        <p class="line"><b>Name :</b> ${studentName}</p>
+        <p class="line"><b>Register No :</b> ${regNo}</p>
+        <p class="line"><b>Degree :</b> ${degree}</p>
+        <p class="line"><b>Department :</b> ${department}</p>
+        <p class="line"><b>Year :</b> ${year}</p>
+        <p class="line"><b>Institution :</b> ${institution}</p>
+        <p class="line"><b>University :</b> ${university}</p>
+        <p class="line"><b>District :</b> ${district}</p>
+        <p class="line"><b>Mail ID :</b> ${mail}</p>
+
+        <hr>
+
+        <h2>GPA Calculator</h2>
+
+        <p><b>Semester :</b> ${semester}</p>
+        <p><b>Regulation :</b> ${gpaRegulation}</p>
+
+        <table>
+            <tr>
+                <th>Subject Title</th>
+                <th>Subject Code</th>
+                <th>Credit</th>
+                <th>Grade</th>
+            </tr>
+
+            ${tableRows}
+        </table>
+
+        <div class="result">
+            ${gpa}
+        </div>
+
+        <hr>
+
+        <h2>CGPA Calculator</h2>
+
+        <p><b>Regulation :</b> ${cgpaRegulation}</p>
+
+        <table>
+            <tr>
+                <th>Semester</th>
+                <th>GPA Obtained</th>
+            </tr>
+
+            ${cgpaRows}
+        </table>
+
+        <div class="result">
+            ${cgpa}
+        </div>
+
+        <div class="verified">
+            VERIFIED
+        </div>
+
+    </body>
+    </html>
+    `);
+
+    printWindow.document.close();
+
+    setTimeout(() => {
+        printWindow.focus();
+        printWindow.print();
+    }, 1000);
+}
 </script>
 
 </body>
