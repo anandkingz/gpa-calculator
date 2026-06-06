@@ -348,6 +348,19 @@ Password must contain minimum 8 characters with 1 uppercase, 1 lowercase, 1 nume
         <th>GPA</th>
     </tr>
 </table>
+    <h2>Semester GPA Summary</h2>
+
+<table>
+<tr>
+    <th>Semester</th>
+    <th>GPA</th>
+</tr>
+
+${semesterGPARows}
+
+</table>
+
+<hr>
 
     <h2>CGPA Calculator</h2>
 
@@ -791,7 +804,7 @@ for(let i = 0; i < semesterGPAs.length; i++){
     <body>
 
         <div class="header">
-            <img src="img/logo.png" alt="Logo" class="logo">
+            <img src="logo.png" alt="Logo" class="logo">
             <h2>University Student CGPA Calculator</h2>
         </div>
 
