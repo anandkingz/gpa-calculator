@@ -342,24 +342,6 @@ Password must contain minimum 8 characters with 1 uppercase, 1 lowercase, 1 nume
 <div class="card hidden" id="cgpaPage">
     <h2>Semester GPA Summary</h2>
 
-<table>
-    <tr>
-        <th>Semester</th>
-        <th>GPA</th>
-    </tr>
-</table>
-    <h2>Semester GPA Summary</h2>
-
-<table>
-<tr>
-    <th>Semester</th>
-    <th>GPA</th>
-</tr>
-
-${semesterGPARows}
-
-</table>
-
 <hr>
 
     <h2>CGPA Calculator</h2>
@@ -673,15 +655,36 @@ function printReport(){
 
     let tableRows = "";
 
-    let table = document.getElementById("subjectTable1");
+for(let sem = 1; sem <= semesterGPAs.length; sem++){
+
+    let table = document.getElementById(`subjectTable${sem}`);
 
     if(table){
+
+        tableRows += `
+        <tr>
+            <th colspan="4">
+                SEMESTER ${sem}
+            </th>
+        </tr>`;
+
         for(let i = 1; i < table.rows.length; i++){
 
-            let title = table.rows[i].cells[0].querySelector("input").value;
-            let code = table.rows[i].cells[1].querySelector("input").value;
-            let credit = table.rows[i].cells[2].querySelector("input").value;
-            let grade = table.rows[i].cells[3].querySelector("select").value;
+            let title =
+            table.rows[i].cells[0]
+            .querySelector("input").value;
+
+            let code =
+            table.rows[i].cells[1]
+            .querySelector("input").value;
+
+            let credit =
+            table.rows[i].cells[2]
+            .querySelector("input").value;
+
+            let grade =
+            table.rows[i].cells[3]
+            .querySelector("select").value;
 
             tableRows += `
             <tr>
@@ -692,6 +695,7 @@ function printReport(){
             </tr>`;
         }
     }
+}
 
     let cgpaRows = "";
 
@@ -712,18 +716,15 @@ function printReport(){
             <td colspan="2">No CGPA Data Available</td>
         </tr>`;
     }
-    let semesterGPARows = "";
+   let semesterGPARows = "";
 
 for(let i = 0; i < semesterGPAs.length; i++){
 
-    if(semesterGPAs[i]){
-
-        semesterGPARows += `
-        <tr>
-            <td>Semester ${i + 1}</td>
-            <td>${semesterGPAs[i]}</td>
-        </tr>`;
-    }
+    semesterGPARows += `
+    <tr>
+        <td>Semester ${i+1}</td>
+        <td>${semesterGPAs[i] || "-"}</td>
+    </tr>`;
 }
     let printWindow = window.open("", "_blank");
 
@@ -977,6 +978,7 @@ function calculateGPA(semesterNo){
     (totalPoints / totalCredits).toFixed(2);
 
     semesterGPAs[semesterNo - 1] = gpa;
+    console.log(semesterGPAs);
 
     document.getElementById(`gpaResult${semesterNo}`)
     .innerHTML =
