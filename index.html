@@ -638,247 +638,216 @@ function printReport(){
     let district = document.getElementById("text").value;
     let mail = document.getElementById("mail").value;
 
-    let semester = document.getElementById("semester") ?
-                   document.getElementById("semester").value : "";
+    let cgpa =
+    document.getElementById("cgpaResult").innerText || "";
 
-    let gpaRegulation = document.getElementById("gparegulation") ?
-                        document.getElementById("gparegulation").value : "";
+    /* ---------- ALL SEMESTER SUBJECT TABLES ---------- */
 
-    let cgpaRegulation = document.getElementById("cgparegulation") ?
-                         document.getElementById("cgparegulation").value : "";
+    let allSemesterTables = "";
 
-    let gpa = document.getElementById("gpaResult") ?
-              document.getElementById("gpaResult").innerText : "";
+    for(let sem = 1; sem <= semesterGPAs.length; sem++){
 
-    let cgpa = document.getElementById("cgpaResult") ?
-               document.getElementById("cgpaResult").innerText : "";
+        let table =
+        document.getElementById(`subjectTable${sem}`);
 
-    let tableRows = "";
+        if(table){
 
-for(let sem = 1; sem <= semesterGPAs.length; sem++){
+            allSemesterTables += `
+            <h3>Semester ${sem}</h3>
 
-    let table = document.getElementById(`subjectTable${sem}`);
+            <table>
+                <tr>
+                    <th>Subject Title</th>
+                    <th>Subject Code</th>
+                    <th>Credit</th>
+                    <th>Grade</th>
+                </tr>
+            `;
 
-    if(table){
+            for(let i=1;i<table.rows.length;i++){
 
-        tableRows += `
-        <tr>
-            <th colspan="4">
-                SEMESTER ${sem}
-            </th>
-        </tr>`;
+                let title =
+                table.rows[i].cells[0]
+                .querySelector("input").value;
 
-        for(let i = 1; i < table.rows.length; i++){
+                let code =
+                table.rows[i].cells[1]
+                .querySelector("input").value;
 
-            let title =
-            table.rows[i].cells[0]
-            .querySelector("input").value;
+                let credit =
+                table.rows[i].cells[2]
+                .querySelector("input").value;
 
-            let code =
-            table.rows[i].cells[1]
-            .querySelector("input").value;
+                let grade =
+                table.rows[i].cells[3]
+                .querySelector("select").value;
 
-            let credit =
-            table.rows[i].cells[2]
-            .querySelector("input").value;
+                allSemesterTables += `
+                <tr>
+                    <td>${title}</td>
+                    <td>${code}</td>
+                    <td>${credit}</td>
+                    <td>${grade}</td>
+                </tr>`;
+            }
 
-            let grade =
-            table.rows[i].cells[3]
-            .querySelector("select").value;
-
-            tableRows += `
-            <tr>
-                <td>${title}</td>
-                <td>${code}</td>
-                <td>${credit}</td>
-                <td>${grade}</td>
-            </tr>`;
+            allSemesterTables += `</table><br>`;
         }
     }
-}
 
-    let cgpaRows = "";
+    /* ---------- GPA SUMMARY ---------- */
 
-    let gpaInputs = document.getElementsByClassName("gpaInput");
+    let semesterGPARows = "";
 
-    for(let i = 0; i < gpaInputs.length; i++){
+    for(let i = 0; i < semesterGPAs.length; i++){
 
-        cgpaRows += `
+        semesterGPARows += `
         <tr>
             <td>Semester ${i + 1}</td>
-            <td>${gpaInputs[i].value}</td>
+            <td>${semesterGPAs[i]}</td>
         </tr>`;
     }
 
-    if(cgpaRows.trim() === ""){
-        cgpaRows = `
-        <tr>
-            <td colspan="2">No CGPA Data Available</td>
-        </tr>`;
-    }
-   let semesterGPARows = "";
+    /* ---------- OPEN PRINT WINDOW ---------- */
 
-for(let i = 0; i < semesterGPAs.length; i++){
-
-    semesterGPARows += `
-    <tr>
-        <td>Semester ${i+1}</td>
-        <td>${semesterGPAs[i] || "-"}</td>
-    </tr>`;
-}
-    let printWindow = window.open("", "_blank");
+    let printWindow =
+    window.open("", "_blank");
 
     printWindow.document.write(`
+
     <html>
     <head>
 
-        <style>
+    <title>CGPA Report</title>
 
-        @page{
-            size:A4;
-            margin:10mm;
-        }
+    <style>
 
-        body{
-            font-family:Arial,sans-serif;
-            padding:20px;
-            color:black;
-        }
+    body{
+        font-family:Arial,sans-serif;
+        padding:20px;
+    }
 
-        .header{
-            display:flex;
-            align-items:center;
-            gap:20px;
-        }
+    .header{
+        display:flex;
+        align-items:center;
+        gap:20px;
+    }
 
-        .logo{
-            width:80px;
-            height:80px;
-        }
+    .logo{
+        width:80px;
+        height:80px;
+    }
 
-        .header h2{
-            flex:1;
-            text-align:center;
-            margin-right:80px;
-        }
+    .header h2{
+        flex:1;
+        text-align:center;
+    }
 
-        table{
-            width:100%;
-            border-collapse:collapse;
-            margin-top:15px;
-        }
+    table{
+        width:100%;
+        border-collapse:collapse;
+        margin-top:10px;
+    }
 
-        table,th,td{
-            border:1px solid black;
-        }
+    table,th,td{
+        border:1px solid black;
+    }
 
-        th,td{
-            padding:8px;
-            text-align:center;
-        }
+    th,td{
+        padding:8px;
+        text-align:center;
+    }
 
-        .line{
-            margin:6px 0;
-        }
+    .line{
+        margin:8px 0;
+    }
 
-        .result{
-            font-size:22px;
-            font-weight:bold;
-            text-align:center;
-            margin-top:20px;
-        }
+    .verified{
+        text-align:right;
+        margin-top:60px;
+        font-size:20px;
+        font-weight:bold;
+    }
 
-        .verified{
-            text-align:right;
-            margin-top:50px;
-            font-size:22px;
-            font-weight:bold;
-        }
+    hr{
+        margin:20px 0;
+    }
 
-        hr{
-            margin:20px 0;
-        }
+    </style>
 
-        </style>
     </head>
 
     <body>
 
-        <div class="header">
-            <img src="logo.png" alt="Logo" class="logo">
-            <h2>University Student CGPA Calculator</h2>
-        </div>
+    <div class="header">
 
-        <hr>
+        <img src="logo.png" class="logo">
 
-        <p class="line"><b>Name :</b> ${studentName}</p>
-        <p class="line"><b>Register No :</b> ${regNo}</p>
-        <p class="line"><b>Degree :</b> ${degree}</p>
-        <p class="line"><b>Department :</b> ${department}</p>
-        <p class="line"><b>Year :</b> ${year}</p>
-        <p class="line"><b>Institution :</b> ${institution}</p>
-        <p class="line"><b>University :</b> ${university}</p>
-        <p class="line"><b>District :</b> ${district}</p>
-        <p class="line"><b>Mail ID :</b> ${mail}</p>
+        <h2>
+        UNIVERSITY STUDENT GPA / CGPA REPORT
+        </h2>
 
-        <hr>
+    </div>
 
-        <h2>GPA Calculator</h2>
+    <hr>
 
-        <p><b>Semester :</b> ${semester}</p>
-        <p><b>Regulation :</b> ${gpaRegulation}</p>
+    <p class="line"><b>Name :</b> ${studentName}</p>
+    <p class="line"><b>Register No :</b> ${regNo}</p>
+    <p class="line"><b>Degree :</b> ${degree}</p>
+    <p class="line"><b>Department :</b> ${department}</p>
+    <p class="line"><b>Year :</b> ${year}</p>
+    <p class="line"><b>Institution :</b> ${institution}</p>
+    <p class="line"><b>University :</b> ${university}</p>
+    <p class="line"><b>District :</b> ${district}</p>
+    <p class="line"><b>Mail :</b> ${mail}</p>
 
-        <table>
-            <tr>
-                <th>Subject Title</th>
-                <th>Subject Code</th>
-                <th>Credit</th>
-                <th>Grade</th>
-            </tr>
+    <hr>
 
-            ${tableRows}
-        </table>
+    <h2>Semester Subject Details</h2>
 
-        <div class="result">
-            ${gpa}
-        </div>
+    ${allSemesterTables}
 
-        <hr>
+    <hr>
 
-        <h2>CGPA Calculator</h2>
+    <h2>Semester GPA Summary</h2>
 
-        <p><b>Regulation :</b> ${cgpaRegulation}</p>
+    <table>
 
-        <table>
-            <tr>
-                <th>Semester</th>
-                <th>GPA Obtained</th>
-            </tr>
+        <tr>
+            <th>Semester</th>
+            <th>GPA</th>
+        </tr>
 
-            ${cgpaRows}
-        </table>
+        ${semesterGPARows}
 
-        <div class="result">
-            ${cgpa}
-        </div>
+    </table>
 
-        <div class="verified">
-            VERIFIED
-        </div>
+    <hr>
+
+    <h2>Final CGPA</h2>
+
+    <h1 style="text-align:center;">
+        ${cgpa}
+    </h1>
+
+    <div class="verified">
+        VERIFIED
+    </div>
 
     </body>
     </html>
+
     `);
 
     printWindow.document.close();
 
     setTimeout(() => {
+
         printWindow.focus();
         printWindow.print();
-    }, 1000);
-}
-let semesterCount = 1;
 
+    },1000);
+}
 function addSemester() {
 
     let container = document.getElementById("semesterContainer");
