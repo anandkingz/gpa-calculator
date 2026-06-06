@@ -176,6 +176,13 @@ body{
     text-align:center;
     margin-right:80px; /* same as logo width */
 }
+.semester-card{
+    margin-top:20px;
+    padding:15px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    background:#f9f9f9;
+}
 </style>
 </head>
 <body>
@@ -330,6 +337,7 @@ Password must contain minimum 8 characters with 1 uppercase, 1 lowercase, 1 nume
 
 <div class="result" id="gpaResult1"></div>
 <div id="semesterContainer"></div>
+</div>
 
 <div class="card hidden" id="cgpaPage">
     <h2>Semester GPA Summary</h2>
@@ -517,32 +525,6 @@ function openCGPA(){
         </label>
         `;
     }
-}
-
-function addSubject(){
-
-    let table=document.getElementById("subjectTable");
-
-    let row=table.insertRow();
-
-    row.innerHTML=`
-    <td><input type="text"></td>
-    <td><input type="text"></td>
-    <td>
-        <input type="number" min="1">
-    </td>
-    <td>
-        <select>
-            <option>O</option>
-            <option>A+</option>
-            <option>A</option>
-            <option>B+</option>
-            <option>B</option>
-            <option>C</option>
-            <option>RA</option>
-        </select>
-    </td>
-    `;
 }
 
 function gradePoint(g){
@@ -888,7 +870,7 @@ function addSemester() {
     let container = document.getElementById("semesterContainer");
 
     let semesterNo =
-    container.getElementsByClassName("semester-card").length + 1;
+    container.getElementsByClassName("semester-card").length + 2;
 
     let div = document.createElement("div");
 
@@ -914,9 +896,7 @@ function addSemester() {
             Calculate GPA
         </button>
 
-        <div id="gpaResult${semesterNo}"
-             class="result">
-        </div>
+        <div id="gpaResult${semesterNo}" class="result"></div>
 
         <hr>
     `;
