@@ -642,58 +642,60 @@ function printReport(){
     document.getElementById("cgpaResult").innerText || "";
 
     /* ---------- ALL SEMESTER SUBJECT TABLES ---------- */
+let allSemesterTables = "";
 
-    let allSemesterTables = "";
+for(let sem = 1; sem <= semesterGPAs.length; sem++){
 
-    for(let sem = 1; sem <= semesterGPAs.length; sem++){
+    let table = document.getElementById(`subjectTable${sem}`);
 
-        let table =
-        document.getElementById(`subjectTable${sem}`);
+    if(!table) continue;
 
-        if(table){
+    let rows = "";
 
-            allSemesterTables += `
-            <h3>Semester ${sem}</h3>
+    for(let i = 1; i < table.rows.length; i++){
 
-            <table>
-                <tr>
-                    <th>Subject Title</th>
-                    <th>Subject Code</th>
-                    <th>Credit</th>
-                    <th>Grade</th>
-                </tr>
-            `;
+        let title =
+        table.rows[i].cells[0].querySelector("input").value;
 
-            for(let i=1;i<table.rows.length;i++){
+        let code =
+        table.rows[i].cells[1].querySelector("input").value;
 
-                let title =
-                table.rows[i].cells[0]
-                .querySelector("input").value;
+        let credit =
+        table.rows[i].cells[2].querySelector("input").value;
 
-                let code =
-                table.rows[i].cells[1]
-                .querySelector("input").value;
+        let grade =
+        table.rows[i].cells[3].querySelector("select").value;
 
-                let credit =
-                table.rows[i].cells[2]
-                .querySelector("input").value;
-
-                let grade =
-                table.rows[i].cells[3]
-                .querySelector("select").value;
-
-                allSemesterTables += `
-                <tr>
-                    <td>${title}</td>
-                    <td>${code}</td>
-                    <td>${credit}</td>
-                    <td>${grade}</td>
-                </tr>`;
-            }
-
-            allSemesterTables += `</table><br>`;
-        }
+        rows += `
+        <tr>
+            <td>${title}</td>
+            <td>${code}</td>
+            <td>${credit}</td>
+            <td>${grade}</td>
+        </tr>`;
     }
+
+    allSemesterTables += `
+    <h3>Semester ${sem}</h3>
+
+    <table>
+        <tr>
+            <th>Subject Title</th>
+            <th>Subject Code</th>
+            <th>Credit</th>
+            <th>Grade</th>
+        </tr>
+
+        ${rows}
+    </table>
+
+    <p style="font-size:18px;font-weight:bold;text-align:right;">
+        GPA : ${semesterGPAs[sem-1]}
+    </p>
+
+    <br>
+    `;
+}
 
     /* ---------- GPA SUMMARY ---------- */
 
@@ -721,7 +723,6 @@ function printReport(){
     <title>CGPA Report</title>
 
     <style>
-
     body{
         font-family:Arial,sans-serif;
         padding:20px;
