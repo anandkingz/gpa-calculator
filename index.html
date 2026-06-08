@@ -652,50 +652,49 @@ for(let sem = 1; sem <= semesterGPAs.length; sem++){
 
     let rows = "";
 
-    for(let i = 1; i < table.rows.length; i++){
+for(let semNo = 1; semNo <= semesterGPAs.length; semNo++){
 
-        let title =
-        table.rows[i].cells[0].querySelector("input").value;
+    let table = document.getElementById(`subjectTable${semNo}`);
 
-        let code =
-        table.rows[i].cells[1].querySelector("input").value;
+    if(table){
 
-        let credit =
-        table.rows[i].cells[2].querySelector("input").value;
+        let rows = "";
 
-        let grade =
-        table.rows[i].cells[3].querySelector("select").value;
+        for(let i = 1; i < table.rows.length; i++){
 
-        rows += `
-        <tr>
-            <td>${title}</td>
-            <td>${code}</td>
-            <td>${credit}</td>
-            <td>${grade}</td>
-        </tr>`;
+            rows += `
+            <tr>
+                <td>${table.rows[i].cells[0].querySelector("input").value}</td>
+                <td>${table.rows[i].cells[1].querySelector("input").value}</td>
+                <td>${table.rows[i].cells[2].querySelector("input").value}</td>
+                <td>${table.rows[i].cells[3].querySelector("select").value}</td>
+            </tr>`;
+        }
+
+        allSemesterTables += `
+            <h3>Semester ${semNo}</h3>
+
+            <table>
+                <tr>
+                    <th>Subject Title</th>
+                    <th>Subject Code</th>
+                    <th>Credit</th>
+                    <th>Grade</th>
+                </tr>
+
+                ${rows}
+            </table>
+
+            <!-- ADD GPA RESULT HERE -->
+            <div class="result">
+                Semester ${semNo} GPA : ${semesterGPAs[semNo-1] || "Not Calculated"}
+            </div>
+
+            <br><br>
+        `;
     }
-
-    allSemesterTables += `
-    <h3>Semester ${sem}</h3>
-
-    <table>
-        <tr>
-            <th>Subject Title</th>
-            <th>Subject Code</th>
-            <th>Credit</th>
-            <th>Grade</th>
-        </tr>
-
-        ${rows}
-    </table>
-
-    <p style="font-size:18px;font-weight:bold;text-align:right;">
-        GPA : ${semesterGPAs[sem-1]}
-    </p>
-
-    <br>
-    `;
 }
+    
 
     /* ---------- GPA SUMMARY ---------- */
 
@@ -785,7 +784,7 @@ for(let sem = 1; sem <= semesterGPAs.length; sem++){
         <img src="logo.png" class="logo">
 
         <h2>
-        UNIVERSITY STUDENT GPA / CGPA REPORT
+           UNIVERSITY STUDENT CGPA REPORT
         </h2>
 
     </div>
@@ -804,13 +803,13 @@ for(let sem = 1; sem <= semesterGPAs.length; sem++){
 
     <hr>
 
-    <h2>Semester Subject Details</h2>
+    <h2> Semester GPA Calculation </h2>
 
     ${allSemesterTables}
 
     <hr>
 
-    <h2>Semester GPA Summary</h2>
+    <h2> Semester CGPA Calculation </h2>
 
     <table>
 
@@ -826,6 +825,11 @@ for(let sem = 1; sem <= semesterGPAs.length; sem++){
     <hr>
 
     <h2>Final CGPA</h2>
+
+<p><b>Degree :</b> ${degree}</p>
+<p><b>Department :</b> ${department}</p>
+<p><b>Year :</b> ${year}</p>
+<p><b>Regulation :</b> ${cgpaRegulation}</p>
 
     <h1 style="text-align:center;">
         ${cgpa}
