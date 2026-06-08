@@ -638,61 +638,51 @@ function printReport(){
     let district = document.getElementById("text").value;
     let mail = document.getElementById("mail").value;
 
-    let cgpa =
-    document.getElementById("cgpaResult").innerText || "";
-
+    let cgpa = document.getElementById("cgpaResult")
+    ? document.getElementById("cgpaResult").innerText
+    : "";
     /* ---------- ALL SEMESTER SUBJECT TABLES ---------- */
 let allSemesterTables = "";
-
-for(let sem = 1; sem <= semesterGPAs.length; sem++){
-
-    let table = document.getElementById(`subjectTable${sem}`);
-
-    if(!table) continue;
-
-    let rows = "";
 
 for(let semNo = 1; semNo <= semesterGPAs.length; semNo++){
 
     let table = document.getElementById(`subjectTable${semNo}`);
 
-    if(table){
+    if(!table) continue;
 
-        let rows = "";
+    let rows = "";
 
-        for(let i = 1; i < table.rows.length; i++){
+    for(let i = 1; i < table.rows.length; i++){
 
-            rows += `
-            <tr>
-                <td>${table.rows[i].cells[0].querySelector("input").value}</td>
-                <td>${table.rows[i].cells[1].querySelector("input").value}</td>
-                <td>${table.rows[i].cells[2].querySelector("input").value}</td>
-                <td>${table.rows[i].cells[3].querySelector("select").value}</td>
-            </tr>`;
-        }
-
-        allSemesterTables += `
-            <h3>Semester ${semNo}</h3>
-
-            <table>
-                <tr>
-                    <th>Subject Title</th>
-                    <th>Subject Code</th>
-                    <th>Credit</th>
-                    <th>Grade</th>
-                </tr>
-
-                ${rows}
-            </table>
-
-            <!-- ADD GPA RESULT HERE -->
-            <div class="result">
-                Semester ${semNo} GPA : ${semesterGPAs[semNo-1] || "Not Calculated"}
-            </div>
-
-            <br><br>
-        `;
+        rows += `
+        <tr>
+            <td>${table.rows[i].cells[0].querySelector("input").value}</td>
+            <td>${table.rows[i].cells[1].querySelector("input").value}</td>
+            <td>${table.rows[i].cells[2].querySelector("input").value}</td>
+            <td>${table.rows[i].cells[3].querySelector("select").value}</td>
+        </tr>`;
     }
+
+    allSemesterTables += `
+    <h3>Semester ${semNo}</h3>
+
+    <table>
+        <tr>
+            <th>Subject Title</th>
+            <th>Subject Code</th>
+            <th>Credit</th>
+            <th>Grade</th>
+        </tr>
+
+        ${rows}
+    </table>
+
+    <div class="result">
+        Semester ${semNo} GPA : ${semesterGPAs[semNo-1] || "Not Calculated"}
+    </div>
+
+    <br>
+    `;
 }
     
 
