@@ -694,16 +694,21 @@ for(let semNo = 1; semNo <= semesterGPAs.length; semNo++){
 
     /* ---------- GPA SUMMARY ---------- */
 
-    let semesterGPARows = "";
+    /* ---------- CGPA INPUT SUMMARY ---------- */
 
-    for(let i = 0; i < semesterGPAs.length; i++){
+let semesterGPARows = "";
 
-        semesterGPARows += `
-        <tr>
-            <td>Semester ${i + 1}</td>
-            <td>${semesterGPAs[i]}</td>
-        </tr>`;
-    }
+let gpaInputs =
+document.querySelectorAll("#semesterInputs .gpaInput");
+
+gpaInputs.forEach((input,index)=>{
+
+    semesterGPARows += `
+    <tr>
+        <td>Semester ${index + 1}</td>
+        <td>${input.value || "-"}</td>
+    </tr>`;
+});
 
     /* ---------- OPEN PRINT WINDOW ---------- */
 
