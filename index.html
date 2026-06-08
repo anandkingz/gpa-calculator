@@ -646,7 +646,8 @@ let allSemesterTables = "";
 
 for(let semNo = 1; semNo <= semesterGPAs.length; semNo++){
 
-    let table = document.getElementById(`subjectTable${semNo}`);
+    let table =
+    document.getElementById(`subjectTable${semNo}`);
 
     if(!table) continue;
 
@@ -664,27 +665,27 @@ for(let semNo = 1; semNo <= semesterGPAs.length; semNo++){
     }
 
     allSemesterTables += `
-    <h3>Semester ${semNo}</h3>
+        <h3>Semester ${semNo}</h3>
 
-    <table>
-        <tr>
-            <th>Subject Title</th>
-            <th>Subject Code</th>
-            <th>Credit</th>
-            <th>Grade</th>
-        </tr>
+        <table>
+            <tr>
+                <th>Subject Title</th>
+                <th>Subject Code</th>
+                <th>Credit</th>
+                <th>Grade</th>
+            </tr>
 
-        ${rows}
-    </table>
+            ${rows}
+        </table>
 
-    <div class="result">
-        Semester ${semNo} GPA : ${semesterGPAs[semNo-1] || "Not Calculated"}
-    </div>
+        <div class="result">
+            Semester ${semNo} GPA :
+            ${semesterGPAs[semNo-1] || "Not Calculated"}
+        </div>
 
-    <br>
+        <br>
     `;
 }
-    
 
     /* ---------- GPA SUMMARY ---------- */
 
