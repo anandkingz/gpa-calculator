@@ -529,58 +529,61 @@ function gradePoint(g){
 
 function createSemesterInputs(){
 
-    let selected=document.querySelector(
-    'input[name="semcount"]:checked');
+    let selected = document.querySelector(
+        'input[name="semcount"]:checked'
+    );
 
     if(!selected){
         alert("Select Semester Count");
         return;
     }
 
-    let count=parseInt(selected.value);
+    let count = parseInt(selected.value);
 
-    let div=document.getElementById("semesterInputs");
+    let div = document.getElementById("semesterInputs");
 
-    div.innerHTML="";
+    // Remove all old GPA fields
+    div.innerHTML = "";
 
-    for(let i=1;i<=count;i++){
+    for(let i = 1; i <= count; i++){
 
-        div.innerHTML+=`
+        div.innerHTML += `
         <input type="number"
-        step="0.01"
-        class="gpaInput"
-        placeholder="Semester ${i} GPA">
+               step="0.01"
+               class="gpaInput"
+               placeholder="Semester ${i} GPA">
         `;
     }
 }
 
 function calculateCGPA(){
 
-    let gpas=document.getElementsByClassName("gpaInput");
+    let gpas = document.querySelectorAll(
+        "#semesterInputs .gpaInput"
+    );
 
-    let sum=0;
+    let sum = 0;
+    let count = 0;
 
-    let count=0;
+    gpas.forEach(function(input){
 
-    for(let g of gpas){
-
-        let value=parseFloat(g.value);
+        let value = parseFloat(input.value);
 
         if(!isNaN(value)){
-            sum+=value;
+            sum += value;
             count++;
         }
-    }
+    });
 
-    if(count===0){
+    if(count === 0){
         alert("Enter GPA values");
         return;
     }
 
-    let cgpa=(sum/count).toFixed(2);
+    let cgpa = (sum / count).toFixed(2);
 
-    document.getElementById("cgpaResult").innerHTML=
-    "Final CGPA : "+cgpa;
+    document.getElementById("cgpaResult").innerHTML =
+        "Final CGPA : " + cgpa;
 }
 function togglePassword(){
 
