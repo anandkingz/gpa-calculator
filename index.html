@@ -240,12 +240,12 @@ Password must contain minimum 8 characters with 1 uppercase, 1 lowercase, 1 nume
         <option>SELECT YEAR</option>
     </select>
 
-   <select id="regulation" placeholder="Regulation"> 
-       <option>REGULATION</option>
-    <option>R2017</option>
-    <option>R2021</option>
-    <option>R2024</option>
-    </select>
+   <select id="regulation" required>
+    <option value="" selected disabled>SELECT REGULATION</option>
+    <option value="R2017">R2017</option>
+    <option value="R2021">R2021</option>
+    <option value="R2024">R2024</option>
+</select>>
     <input type="text" id="institution" placeholder="Institution Name">
 
     <input type="text" id="university" placeholder="University Name">
@@ -319,12 +319,6 @@ Password must contain minimum 8 characters with 1 uppercase, 1 lowercase, 1 nume
     <option>8</option>
 </select>
 
-    <label><b>REGULATION</b></label>
-<select id="gparegulation">
-    <option>R2017</option>
-    <option>R2021</option>
-    <option>R2024</option>
-</select>
 <div id="gpaSemesterRadio" class="radio-group"></div>
 
     <table id="subjectTable1">
@@ -353,13 +347,6 @@ Password must contain minimum 8 characters with 1 uppercase, 1 lowercase, 1 nume
 
     <div class="info" id="cgpaInfo"></div>
 
-     <label><b>REGULATION</b></label>
-
-<select id="cgparegulation">
-    <option>R2017</option>
-    <option>R2021</option>
-    <option>R2024</option>
-</select>
     <h3>Select Semester Count</h3>
 
     <div id="semesterRadio" class="radio-group"></div>
