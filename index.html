@@ -721,22 +721,19 @@ gpaInputs.forEach((input,index)=>{
         <td>${input.value || "-"}</td>
     </tr>`;
 });
-    let now = new Date();
-
-let date = now.toLocaleDateString("en-GB"); // 07/06/2026
-
-let time = now.toLocaleTimeString("en-US", {
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-    hour12: true
-}); // 02:25:10 AM
 
 /* ---------- PRINT WINDOW ---------- */
 
 let printWindow = window.open("", "_blank");
 
 printWindow.document.write(`
+<html>
+<head>
+
+<title>CGPA Report</title>
+
+<style>
+
 body{
     font-family:Arial,sans-serif;
     padding:20px;
@@ -745,7 +742,7 @@ body{
 .header{
     display:flex;
     align-items:center;
-    justify-content:space-between;
+    gap:20px;
 }
 
 .logo{
@@ -756,15 +753,6 @@ body{
 .header h2{
     flex:1;
     text-align:center;
-    margin:0;
-    color:black;
-}
-
-.datetime{
-    text-align:right;
-    font-size:14px;
-    font-weight:bold;
-    min-width:120px;
 }
 
 table{
@@ -802,18 +790,18 @@ th,td{
 hr{
     margin:20px 0;
 }
+
+</style>
+
+</head>
+
 <body>
 
 <div class="header">
     <img src="logo.png" class="logo" alt="Logo">
-
     <h2>UNIVERSITY STUDENT CGPA REPORT</h2>
-
-    <div class="datetime">
-        <div>${date}</div>
-        <div>${time}</div>
-    </div>
 </div>
+
 <hr>
 
 <p class="line"><b>Name :</b> ${studentName}</p>
